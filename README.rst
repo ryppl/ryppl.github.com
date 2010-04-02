@@ -2,7 +2,7 @@
  The Ryppl Effort
 ==================
 
-These pages live at http://ryppl.github.com.  
+These pages live at http://ryppl.github.com.  See also http://ryppl.org and http://github.com/ryppl/ryppl
 
 .. index page generated with:
 
