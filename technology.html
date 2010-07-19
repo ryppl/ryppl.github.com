@@ -1,0 +1,177 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Technologies &mdash; Ryppl</title>
+    <link rel="stylesheet" href="_static/sphinxdoc.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '#',
+        VERSION:     '0.0',
+        COLLAPSE_MODINDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="top" title="Ryppl" href="index.html" />
+    <link rel="next" title="Workflows" href="workflows.html" />
+    <link rel="prev" title="Distributed Development, Testing and Installation with Ryppl" href="index.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="workflows.html" title="Workflows"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="index.html" title="Distributed Development, Testing and Installation with Ryppl"
+             accesskey="P">previous</a> |</li>
+        <li><a href="index.html">Ryppl</a> &raquo;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+            <p class="logo"><a href="index.html">
+              <img class="logo" src="_static/ryppl.png" alt="Logo"/>
+            </a></p>
+            <h3><a href="index.html">Table Of Contents</a></h3>
+            <ul>
+<li><a class="reference external" href="#">Technologies</a><ul>
+<li><a class="reference external" href="#the-python-packaging-ecosystem">The Python Packaging Ecosystem</a></li>
+<li><a class="reference external" href="#learning-about-git">Learning about Git</a><ul>
+<li><a class="reference external" href="#internals-and-other-resources">Internals and Other Resources</a></li>
+<li><a class="reference external" href="#information-on-git-submodules">Information on Git Submodules</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+            <h4>Previous topic</h4>
+            <p class="topless"><a href="index.html"
+                                  title="previous chapter">Distributed Development, Testing and Installation with Ryppl</a></p>
+            <h4>Next topic</h4>
+            <p class="topless"><a href="workflows.html"
+                                  title="next chapter">Workflows</a></p>
+            <h3>This Page</h3>
+            <ul class="this-page-menu">
+              <li><a href="_sources/technology.txt"
+                     rel="nofollow">Show Source</a></li>
+            </ul>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="technologies">
+<h1>Technologies<a class="headerlink" href="#technologies" title="Permalink to this headline">¶</a></h1>
+<p>Ryppl relies on the following technologies:</p>
+<ul class="simple">
+<li><a class="reference external" href="http://python.org">Python</a> 2.x</li>
+<li><a class="reference external" href="http://git-scm.com">Git</a></li>
+<li><a class="reference external" href="http://cmake.org">CMake</a></li>
+<li><a class="reference external" href="http://pip.openplans.org">pip</a></li>
+<li><a class="reference external" href="http://bitbucket.org/tarek/distutils2/wiki/GSoC_2010_teams">Distutils2</a></li>
+</ul>
+<p>You don't need to know Python at all to use Ryppl; it's just an
+implementation language.  You also don't need to know Git… unless you
+are going to be doing development work on Ryppl projects.  Ryppl
+projects are always managed via Git repositories.  If you really must
+use a different SCM for real development work, there are ways to link
+Git with most popular SCMs.</p>
+<div class="section" id="the-python-packaging-ecosystem">
+<h2>The Python Packaging Ecosystem<a class="headerlink" href="#the-python-packaging-ecosystem" title="Permalink to this headline">¶</a></h2>
+<p>We're heavily leveraging the packaging technology under development in
+the Python world, specifically the <a class="reference external" href="http://bitbucket.org/tarek/distutils2/wiki/GSoC_2010_teams">Distutils2</a> project (led by Tarek
+Ziadé) and the <a class="reference external" href="http://pip.openplans.org">pip</a> project (led by Ian Bicking).  You can read more
+about how these tools relate in <a class="reference external" href="http://tarekziade.wordpress.com/2010/05/31/distutils2-vs-pip/">Tarek's blog posting</a>.
+The state of Python Packaging is confusing and messy, but <a class="reference external" href="http://guide.python-distribute.org/introduction.html#current-state-of-packaging">this
+article</a>
+helps a bit to clear things up.</p>
+</div>
+<div class="section" id="learning-about-git">
+<h2>Learning about Git<a class="headerlink" href="#learning-about-git" title="Permalink to this headline">¶</a></h2>
+<p>The quick skinny on <a class="reference external" href="http://git-scm.com">Git</a>, if you don't already know, is that it is a
+distributed revision control system that uses copy-on-write and
+preserves object identities across clones of a repository.  What does
+that mean for you?</p>
+<ul class="simple">
+<li><strong>Distributed</strong> means that every working copy of a project has a
+subdirectory containing a repository that holds <em>at least</em> the
+complete development history up to that working copy state.</li>
+<li><strong>Copy-on-write</strong> means that no data is ever destroyed, as long as
+it can be referenced, and Git can store commits and all their
+ancestors as objects.</li>
+<li><strong>Object identities</strong> that persist across repositories means that
+when you pull someone else's work into your repository, any history
+that work shares with what your repository contains is automatically
+and reliably recognized, and used.  Each repository actually
+contains a subset of a potentially larger DAG of commits and merges.</li>
+</ul>
+<p>If you need to know more and you're just getting started with Git,
+pick up <a class="reference external" href="http://progit.org/book">Pro Git</a> and watch <a class="reference external" href="http://www.youtube.com/watch?v=j45cs5_nY2k">Contributing
+with Git</a>, Johannes
+Schindelin's introductory Google Tech Talk.</p>
+<div class="section" id="internals-and-other-resources">
+<h3>Internals and Other Resources<a class="headerlink" href="#internals-and-other-resources" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><a class="reference external" href="http://gitref.org/">Git Reference</a></li>
+<li><a class="reference external" href="http://ftp.newartisans.com/pub/git.from.bottom.up.pdf">Git from the bottom up</a> (See also the links at the end of this document).</li>
+<li><a class="reference external" href="http://eagain.net/articles/git-for-computer-scientists/">Git for Computer Scientists</a></li>
+<li><a class="reference external" href="http://git-scm.com">Git home page</a></li>
+<li><a class="reference external" href="http://github.com/defunkt/hub">hub</a>: convenient shorthands for working with <a class="reference external" href="http://github.com">GitHub</a>.</li>
+</ul>
+</div>
+<div class="section" id="information-on-git-submodules">
+<h3>Information on Git Submodules<a class="headerlink" href="#information-on-git-submodules" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><a class="reference external" href="http://www.kernel.org/pub/software/scm/git/docs/git-submodule.html">http://www.kernel.org/pub/software/scm/git/docs/git-submodule.html</a></li>
+<li><a class="reference external" href="http://woss.name/blog/2008/4/9/using-git-submodules-to-track-plugins.html">http://woss.name/blog/2008/4/9/using-git-submodules-to-track-plugins.html</a></li>
+<li><a class="reference external" href="http://git.or.cz/gitwiki/GitSubmoduleTutorial">http://git.or.cz/gitwiki/GitSubmoduleTutorial</a></li>
+<li><a class="reference external" href="http://gaarai.com/2009/04/20/git-submodules-adding-using-removing-and-updating/">http://gaarai.com/2009/04/20/git-submodules-adding-using-removing-and-updating/</a></li>
+<li><a class="reference external" href="http://progit.org/book/ch6-6.html">http://progit.org/book/ch6-6.html</a></li>
+</ul>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="workflows.html" title="Workflows"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="index.html" title="Distributed Development, Testing and Installation with Ryppl"
+             >previous</a> |</li>
+        <li><a href="index.html">Ryppl</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+      &copy; Copyright 2009-2010, troy d. straszheim and david abrahams --  Version 0a92bff13e5d792b6f289ef2377edb5ebfb40da7, Wed, 14 Jul 2010.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 0.6.5.
+    </div>
+  </body>
+</html>

@@ -1,0 +1,110 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Various howtos and assorted notes &mdash; Ryppl</title>
+    <link rel="stylesheet" href="_static/sphinxdoc.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '#',
+        VERSION:     '0.0',
+        COLLAPSE_MODINDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="top" title="Ryppl" href="index.html" />
+    <link rel="next" title="Design Details" href="design-details.html" />
+    <link rel="prev" title="SVN Command equivalents" href="svn_equivs.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="design-details.html" title="Design Details"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="svn_equivs.html" title="SVN Command equivalents"
+             accesskey="P">previous</a> |</li>
+        <li><a href="index.html">Ryppl</a> &raquo;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+            <p class="logo"><a href="index.html">
+              <img class="logo" src="_static/ryppl.png" alt="Logo"/>
+            </a></p>
+            <h3><a href="index.html">Table Of Contents</a></h3>
+            <ul>
+<li><a class="reference external" href="#">Various howtos and assorted notes</a><ul>
+<li><a class="reference external" href="#synchronize-actual-submodule-clones-to-contents-of-gitmodules">Synchronize actual submodule clones to contents of <tt class="docutils literal"><span class="pre">gitmodules</span></tt></a></li>
+</ul>
+</li>
+</ul>
+
+            <h4>Previous topic</h4>
+            <p class="topless"><a href="svn_equivs.html"
+                                  title="previous chapter">SVN Command equivalents</a></p>
+            <h4>Next topic</h4>
+            <p class="topless"><a href="design-details.html"
+                                  title="next chapter">Design Details</a></p>
+            <h3>This Page</h3>
+            <ul class="this-page-menu">
+              <li><a href="_sources/various_howtos.txt"
+                     rel="nofollow">Show Source</a></li>
+            </ul>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="various-howtos-and-assorted-notes">
+<h1>Various howtos and assorted notes<a class="headerlink" href="#various-howtos-and-assorted-notes" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="synchronize-actual-submodule-clones-to-contents-of-gitmodules">
+<h2>Synchronize actual submodule clones to contents of <tt class="docutils literal"><span class="pre">gitmodules</span></tt><a class="headerlink" href="#synchronize-actual-submodule-clones-to-contents-of-gitmodules" title="Permalink to this headline">¶</a></h2>
+<p>Commit modifications to <tt class="docutils literal"><span class="pre">.gitmodules</span></tt>, rm the entry from
+<tt class="docutils literal"><span class="pre">.git/config</span></tt>, <em>rm the submodule directory from src/</em> then
+<tt class="docutils literal"><span class="pre">submodule</span> <span class="pre">init</span></tt> and <tt class="docutils literal"><span class="pre">submodule</span> <span class="pre">update</span></tt>.</p>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="design-details.html" title="Design Details"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="svn_equivs.html" title="SVN Command equivalents"
+             >previous</a> |</li>
+        <li><a href="index.html">Ryppl</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+      &copy; Copyright 2009-2010, troy d. straszheim and david abrahams --  Version 0a92bff13e5d792b6f289ef2377edb5ebfb40da7, Wed, 14 Jul 2010.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 0.6.5.
+    </div>
+  </body>
+</html>

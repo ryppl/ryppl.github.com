@@ -1,0 +1,411 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Workflows &mdash; Ryppl</title>
+    <link rel="stylesheet" href="_static/sphinxdoc.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '#',
+        VERSION:     '0.0',
+        COLLAPSE_MODINDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="top" title="Ryppl" href="index.html" />
+    <link rel="next" title="Dependency Management" href="dependency-management.html" />
+    <link rel="prev" title="Technologies" href="technology.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="dependency-management.html" title="Dependency Management"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="technology.html" title="Technologies"
+             accesskey="P">previous</a> |</li>
+        <li><a href="index.html">Ryppl</a> &raquo;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+            <p class="logo"><a href="index.html">
+              <img class="logo" src="_static/ryppl.png" alt="Logo"/>
+            </a></p>
+            <h3><a href="index.html">Table Of Contents</a></h3>
+            <ul>
+<li><a class="reference external" href="#">Workflows</a><ul>
+<li><a class="reference external" href="#conventions">Conventions</a></li>
+<li><a class="reference external" href="#fundamentals">Fundamentals</a><ul>
+<li><a class="reference external" href="#tool-installation">Tool Installation</a></li>
+<li><a class="reference external" href="#workspaces">Workspaces</a></li>
+<li><a class="reference external" href="#package-installation">Package Installation</a></li>
+</ul>
+</li>
+<li><a class="reference external" href="#development">Development</a><ul>
+<li><a class="reference external" href="#getting-the-source">Getting the Source</a></li>
+<li><a class="reference external" href="#publishing-projects">Publishing Projects</a></li>
+<li><a class="reference external" href="#merge-requests">Merge Requests</a></li>
+<li><a class="reference external" href="#creating-a-release">Creating a Release</a></li>
+<li><a class="reference external" href="#review-outstanding-merge-requests">Review Outstanding Merge Requests</a></li>
+</ul>
+</li>
+<li><a class="reference external" href="#testing">Testing</a><ul>
+<li><a class="reference external" href="#testing-specific-projects">Testing Specific Projects</a></li>
+<li><a class="reference external" href="#testing-dependencies">Testing Dependencies</a></li>
+<li><a class="reference external" href="#remote-testing">Remote Testing</a></li>
+<li><a class="reference external" href="#test-slave-aliases">Test Slave Aliases</a></li>
+<li><a class="reference external" href="#setting-up-a-test-slave">Setting up a Test Slave</a></li>
+<li><a class="reference external" href="#subscribing-to-test-results">Subscribing to Test Results</a></li>
+<li><a class="reference external" href="#releasability">Releasability</a></li>
+</ul>
+</li>
+<li><a class="reference external" href="#packaging-release">Packaging / Release</a></li>
+</ul>
+</li>
+</ul>
+
+            <h4>Previous topic</h4>
+            <p class="topless"><a href="technology.html"
+                                  title="previous chapter">Technologies</a></p>
+            <h4>Next topic</h4>
+            <p class="topless"><a href="dependency-management.html"
+                                  title="next chapter">Dependency Management</a></p>
+            <h3>This Page</h3>
+            <ul class="this-page-menu">
+              <li><a href="_sources/workflows.txt"
+                     rel="nofollow">Show Source</a></li>
+            </ul>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="workflows">
+<h1>Workflows<a class="headerlink" href="#workflows" title="Permalink to this headline">¶</a></h1>
+<p>This section describes cases that need to be handled by this system,
+not just for library developers, but for end-users, integrators, etc.
+These use cases are not currently fully-prioritized.</p>
+<div class="section" id="conventions">
+<h2>Conventions<a class="headerlink" href="#conventions" title="Permalink to this headline">¶</a></h2>
+<p>Most <cite>ryppl</cite> commands take the form:</p>
+<pre class="literal-block">
+ryppl <em>command-name</em> [ <em>options</em>… ] [ <em>project-names</em>… ]
+</pre>
+<p>If no <em>project-names</em> are supplied, such commands expect your current
+directory to be in the working tree of a Ryppl project, and that you
+intend to operate on that project.</p>
+</div>
+<div class="section" id="fundamentals">
+<h2>Fundamentals<a class="headerlink" href="#fundamentals" title="Permalink to this headline">¶</a></h2>
+<p>We expect the following tasks to be done frequently by (relatively)
+non-technical people, so we intend them to be <strong>dead simple.</strong></p>
+<div class="section" id="tool-installation">
+<h3>Tool Installation<a class="headerlink" href="#tool-installation" title="Permalink to this headline">¶</a></h3>
+<p>Installation of tools that ryppl needs to operate should be a single
+command with interactive steps as necessary.  Maybe this is just part
+of what happens every time the ryppl command is run:</p>
+<pre class="literal-block">
+$ ryppl <em>whatever</em>
+I couldn't find a CMake installation in your path.  Type the path to
+a cmake executable here [default: I'll install one for you]:
+</pre>
+</div>
+<div class="section" id="workspaces">
+<h3>Workspaces<a class="headerlink" href="#workspaces" title="Permalink to this headline">¶</a></h3>
+<p>Ryppl will need a place to check out packages; call this a “ryppl
+workspace.”  A <strong>ryppl workspace</strong> is just a directory with some sort
+of marker file (e.g. in its .ryppl subdirectory) and a subdirectory
+for each project in the workspace.</p>
+<p>The Cygwin binary installer's package directory selection provides a
+nearly perfect model: you can say “download from internet,” which
+means you don't really care where it puts the package files, or you
+can supply a path.  Non-technical users who are installing software
+will typically choose “download from internet.”  Anyone doing
+development will typically choose a location for packages.  Invoking
+<tt class="docutils literal"><span class="pre">ryppl</span></tt> from within a ryppl workspace simply uses that workspace.</p>
+<p>Most users will only need to use a single workspace, but a developer
+who works on multiple projects that may have conflicting version
+dependencies might want to establish separate workspaces for each
+project.</p>
+<p>Workspaces may also contain a <strong>virtual environment</strong>: an extension of
+Python's <a class="reference external" href="http://iamzed.com/2009/05/07/a-primer-on-virtualenv/">virtualenv functionality</a> that—in many
+cases—allows complete testing of an installation without root (or
+administrator) access, and mostly isolated from effects of things
+<em>actually</em> installed on the system.</p>
+</div>
+<div class="section" id="package-installation">
+<h3>Package Installation<a class="headerlink" href="#package-installation" title="Permalink to this headline">¶</a></h3>
+<p>In the simplest case, the user wants to install some software and
+doesn't care about required intermediate steps, e.g. compilation and
+testing.  The <em>dead-simple command</em> is:</p>
+<pre class="literal-block">
+$ ryppl install <em>project1</em> <em>project2</em> <em>project3</em>…
+</pre>
+<p>With testing prior to installation:</p>
+<pre class="literal-block">
+$ ryppl test <em>project1</em> <em>project2</em> <em>project3</em>…
+$ ryppl install <em>project1</em> <em>project2</em> <em>project3</em>…
+</pre>
+</div>
+</div>
+<div class="section" id="development">
+<h2>Development<a class="headerlink" href="#development" title="Permalink to this headline">¶</a></h2>
+<p>Things done by software developers.</p>
+<div class="section" id="getting-the-source">
+<h3>Getting the Source<a class="headerlink" href="#getting-the-source" title="Permalink to this headline">¶</a></h3>
+<p>To get the source for an existing ryppl project, start by pulling the
+code down from the official repository:</p>
+<pre class="literal-block">
+$ ryppl checkout <em>project</em>
+</pre>
+<p>that puts the source for <em>project</em> in a subdirectory called <em>project/</em>
+of your ryppl workspace.  You now have a Git repository in which to
+work.  To commit changes locally, simply use regular Git commands in
+the project subdirectory (or a child).  Most ryppl commands described
+in the <a class="reference internal" href="#development">Development</a> section are documented with the assumption that
+the current directory is the project subdirectory or a child thereof.</p>
+<p>If you are a maintainer, ryppl will detect that fact.  Otherwise, most
+likely you will want to create a public repository where you can
+publish your changes.  You can wait until you actually want to
+publish, but you may find that you are more inclined to push changes
+out (and thus create a non-local backup of your work) if the
+repository is already prepared.  See <a class="reference internal" href="#publishing-projects">Publishing Projects</a> for
+details.</p>
+</div>
+<div class="section" id="publishing-projects">
+<h3>Publishing Projects<a class="headerlink" href="#publishing-projects" title="Permalink to this headline">¶</a></h3>
+<p>If you make changes to a project, you may want to submit those changes
+to the upstream maintainer, or share your changes with other
+interested users.  To make your (usually modified) project state
+visible to the world,</p>
+<pre class="literal-block">
+$ ryppl publish <em>project</em>
+</pre>
+<p>If the project you are publishing was cloned from an existing
+project's “official” repository, Ryppl will dump instructions for
+creating a public clone of the official repository. <a class="footnote-reference" href="#siteclone" id="id1">[1]</a>
+Otherwise it will dump instructions for getting the project into the
+Ryppl collection.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">We don't know what the mechanism looks like to actually get
+a project into the Ryppl collection.  Can anyone just add things
+to Ryppl, or is there a gatekeeper, or even a human processing the
+additions?  We need to decide.</p>
+</div>
+</div>
+<div class="section" id="merge-requests">
+<h3>Merge Requests<a class="headerlink" href="#merge-requests" title="Permalink to this headline">¶</a></h3>
+<p>To request that a project maintainer merge your changes into the
+project's official repository,</p>
+<div class="highlight-git_shell"><div class="highlight"><pre><span class="go">$</span><span class="g-Whitespace"> </span><span class="go">ryppl</span><span class="g-Whitespace"> </span><span class="go">merge-request</span><span class="g-Whitespace"></span>
+</pre></div>
+</div>
+<p>will generate an email to the project maintainer containing
+instructions for getting and merging your code, giving you an
+opportunity to edit the message. <a class="footnote-reference" href="#api" id="id2">[2]</a></p>
+</div>
+<div class="section" id="creating-a-release">
+<h3>Creating a Release<a class="headerlink" href="#creating-a-release" title="Permalink to this headline">¶</a></h3>
+<p>If you are a project maintainer, it is up to you to decide when the
+project can be released.  Releases are created by tagging revisions in
+your Git repository.  To release your current working tree, simply</p>
+<div class="highlight-git_shell"><div class="highlight"><pre><span class="go">$</span><span class="g-Whitespace"> </span><span class="go">ryppl</span><span class="g-Whitespace"> </span><span class="go">release</span><span class="g-Whitespace"></span>
+</pre></div>
+</div>
+<p>If you are working on a branch other than your mainline (usually
+<tt class="docutils literal"><span class="pre">master</span></tt>), you'll create a point release or a pre-release
+(e.g. beta).  You can add an explicit version string, or ryppl will
+attempt to assign one for you.</p>
+</div>
+<div class="section" id="review-outstanding-merge-requests">
+<h3>Review Outstanding Merge Requests<a class="headerlink" href="#review-outstanding-merge-requests" title="Permalink to this headline">¶</a></h3>
+<p>Initially, merge requests can be tracked in the maintainers' own
+personal email systems.  At some point we may want to keep track of
+which merge requests are unhandled, so a maintainer can ask,</p>
+<div class="highlight-git_shell"><div class="highlight"><pre><span class="go">$</span><span class="g-Whitespace"> </span><span class="go">ryppl</span><span class="g-Whitespace"> </span><span class="go">show</span><span class="g-Whitespace"> </span><span class="go">merge-requests</span><span class="g-Whitespace"></span>
+</pre></div>
+</div>
+<p>[This is a low-priority feature.]</p>
+</div>
+</div>
+<div class="section" id="testing">
+<h2>Testing<a class="headerlink" href="#testing" title="Permalink to this headline">¶</a></h2>
+<p>To test a Ryppl project on the local machine from within its project
+directory, simply:</p>
+<div class="highlight-git_shell"><div class="highlight"><pre><span class="go">$</span><span class="g-Whitespace"> </span><span class="go">ryppl</span><span class="g-Whitespace"> </span><span class="go">test</span><span class="g-Whitespace"></span>
+</pre></div>
+</div>
+<div class="section" id="testing-specific-projects">
+<h3>Testing Specific Projects<a class="headerlink" href="#testing-specific-projects" title="Permalink to this headline">¶</a></h3>
+<p>Testing specific Ryppl projects is just as easy:</p>
+<pre class="literal-block">
+$ ryppl test <em>project1</em>, <em>project2</em>…
+</pre>
+</div>
+<div class="section" id="testing-dependencies">
+<h3>Testing Dependencies<a class="headerlink" href="#testing-dependencies" title="Permalink to this headline">¶</a></h3>
+<p>To also test all the projects that a given list of projects depends on
+(transitively):</p>
+<pre class="literal-block">
+$ ryppl test --deep <em>project1</em>, <em>project2</em>…
+</pre>
+</div>
+<div class="section" id="remote-testing">
+<h3>Remote Testing<a class="headerlink" href="#remote-testing" title="Permalink to this headline">¶</a></h3>
+<p>One of ryppl's most important features is the ability for anyone to
+dedicate testing resources to a project.  That allows testing on
+diverse platforms not controlled by the project maintainer.  To
+test remotely, simply:</p>
+<div class="highlight-git_shell"><div class="highlight"><pre><span class="go">$</span><span class="g-Whitespace"> </span><span class="go">ryppl</span><span class="g-Whitespace"> </span><span class="go">remote-test</span><span class="g-Whitespace"></span>
+</pre></div>
+</div>
+<p>which will request results from your “usual” set of platforms for the
+HEAD of the current working tree.  If you have made changes to the
+current working tree that aren't checked in, you'll be warned first.
+Test result notification emails include a ryppl command-line that the
+maintainer can use to release the tested state.</p>
+<p>To test on specific slaves, they can be named on the command-line:</p>
+<pre class="literal-block">
+$ ryppl remote-test --slave=<em>slave1</em>,<em>slave2</em>, …
+</pre>
+</div>
+<div class="section" id="test-slave-aliases">
+<h3>Test Slave Aliases<a class="headerlink" href="#test-slave-aliases" title="Permalink to this headline">¶</a></h3>
+<p>In <tt class="docutils literal"><span class="pre">.ryppl/slave-aliases</span></tt> at the project root (and in the user's
+home directory), one can define aliases for test slaves and pools
+thereof.  Each test slave is identified by a unique key that we'll
+generate somehow:</p>
+<div class="highlight-git_shell"><div class="highlight"><pre><span class="go">troymac:</span><span class="g-Whitespace">      </span><span class="go">19fa345c9732d5</span><span class="g-Whitespace"></span>
+<span class="go">bemanppcmac:</span><span class="g-Whitespace">  </span><span class="go">92d831e63b4572</span><span class="g-Whitespace"></span>
+<span class="go">davemac:</span><span class="g-Whitespace">      </span><span class="go">29831d6eb354c7</span><span class="g-Whitespace"></span>
+<span class="go">mac:</span><span class="g-Whitespace">          </span><span class="go">troymac,</span><span class="g-Whitespace"> </span><span class="go">bemanppcmac,</span><span class="g-Whitespace"> </span><span class="go">davemac,</span><span class="g-Whitespace"> </span><span class="go">9a1f3c7923dc</span><span class="g-Whitespace"></span>
+</pre></div>
+</div>
+<p>Slaves can be identified either by unique key or by alias.  In the
+example above, <tt class="docutils literal"><span class="pre">mac</span></tt> is an alias for a pool of four machines,
+presumably all Apple Macs.  Ryppl will choose among these slaves or
+(eventually) distribute the tests among them, based on current
+workload.  The special slave alias <tt class="docutils literal"><span class="pre">default</span></tt> defines the slaves to
+use when no other slaves are specified.</p>
+</div>
+<div class="section" id="setting-up-a-test-slave">
+<h3>Setting up a Test Slave<a class="headerlink" href="#setting-up-a-test-slave" title="Permalink to this headline">¶</a></h3>
+<div class="admonition-writeme admonition ">
+<p class="first admonition-title">WRITEME</p>
+<ul class="last simple">
+<li>Subset of projects</li>
+<li>Subset of public repos/developers to pull from</li>
+</ul>
+</div>
+</div>
+<div class="section" id="subscribing-to-test-results">
+<h3>Subscribing to Test Results<a class="headerlink" href="#subscribing-to-test-results" title="Permalink to this headline">¶</a></h3>
+<div class="admonition-writeme admonition ">
+<p class="first admonition-title">WRITEME</p>
+<p class="last">Some way to get notifications of tests you didn't initiate</p>
+</div>
+</div>
+<div class="section" id="releasability">
+<h3>Releasability<a class="headerlink" href="#releasability" title="Permalink to this headline">¶</a></h3>
+<p>Every project has a file .ryppl/releasability.xml <a class="footnote-reference" href="#xml" id="id3">[3]</a> that
+describes the criteria for a project's releasability in terms of which
+tests pass on particular test slave aliases.  The file format is, at
+least initially, based on the <a class="reference external" href="https://svn.boost.org/trac/boost/browser/trunk/status/explicit-failures.xsd">format</a>
+of <a class="reference external" href="https://svn.boost.org/trac/boost/browser/trunk/status/explicit-failures-markup.xml">Boost's corresponding file</a></p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">We have no particular attachment to using XML for this file;
+it's just that we have precedent.  There's probably a better
+choice.</p>
+</div>
+<p>To summarize a project's releasability criteria,</p>
+<div class="highlight-git_shell"><div class="highlight"><pre><span class="go">$</span><span class="g-Whitespace"> </span><span class="go">ryppl</span><span class="g-Whitespace"> </span><span class="go">show</span><span class="g-Whitespace"> </span><span class="go">release-criteria</span><span class="g-Whitespace"></span>
+</pre></div>
+</div>
+<p>[This is a low-priority feature.]</p>
+</div>
+</div>
+<div class="section" id="packaging-release">
+<h2>Packaging / Release<a class="headerlink" href="#packaging-release" title="Permalink to this headline">¶</a></h2>
+<div class="admonition-writeme admonition ">
+<p class="first admonition-title">WRITEME</p>
+<p>Requirements:</p>
+<ul class="last simple">
+<li>Automatically notify maintainers of breakage (email).  Show test /failures/</li>
+<li>Nightly Auto-tagged releasable branch for each library</li>
+<li>Continuous testing of the release branch</li>
+<li>Make binaries</li>
+</ul>
+</div>
+<table class="docutils footnote" frame="void" id="siteclone" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id1">[1]</a></td><td>If the official repository is hosted on <a class="reference external" href="http://gitorious.org">Gitorious</a> or
+<a class="reference external" href="http://github.com">GitHub</a>, these instructions will include directions for cloning
+the repository on the site itself, which enables some cool
+tracking features.</td></tr>
+</tbody>
+</table>
+<table class="docutils footnote" frame="void" id="api" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id2">[2]</a></td><td>If the repository host has an API that allows such requests
+to be generated (e.g. as <a class="reference external" href="http://github.com">GitHub</a> does), we may eventually use that
+API where appropriate, but it's not a high priority.</td></tr>
+</tbody>
+</table>
+<table class="docutils footnote" frame="void" id="xml" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id3">[3]</a></td><td>I'm not attached to XML and we could easily allow other
+formats as well.  XML makes the transition easier for Boost,
+though.</td></tr>
+</tbody>
+</table>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="dependency-management.html" title="Dependency Management"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="technology.html" title="Technologies"
+             >previous</a> |</li>
+        <li><a href="index.html">Ryppl</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+      &copy; Copyright 2009-2010, troy d. straszheim and david abrahams --  Version 0a92bff13e5d792b6f289ef2377edb5ebfb40da7, Wed, 14 Jul 2010.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 0.6.5.
+    </div>
+  </body>
+</html>

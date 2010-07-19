@@ -1,0 +1,241 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Dependency Management &mdash; Ryppl</title>
+    <link rel="stylesheet" href="_static/sphinxdoc.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '#',
+        VERSION:     '0.0',
+        COLLAPSE_MODINDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="top" title="Ryppl" href="index.html" />
+    <link rel="next" title="Superprojects" href="superprojects.html" />
+    <link rel="prev" title="Workflows" href="workflows.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="superprojects.html" title="Superprojects"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="workflows.html" title="Workflows"
+             accesskey="P">previous</a> |</li>
+        <li><a href="index.html">Ryppl</a> &raquo;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+            <p class="logo"><a href="index.html">
+              <img class="logo" src="_static/ryppl.png" alt="Logo"/>
+            </a></p>
+            <h3><a href="index.html">Table Of Contents</a></h3>
+            <ul>
+<li><a class="reference external" href="#">Dependency Management</a><ul>
+<li><a class="reference external" href="#the-graph">The Graph</a></li>
+<li><a class="reference external" href="#the-ryppl-directory">The <tt class="docutils literal"><span class="pre">.ryppl</span></tt> Directory</a></li>
+<li><a class="reference external" href="#specifics-of-setup">Specifics of Setup</a></li>
+<li><a class="reference external" href="#events">Events</a><ul>
+<li><a class="reference external" href="#developer-update">Developer Update</a></li>
+<li><a class="reference external" href="#user-update">User Update</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+            <h4>Previous topic</h4>
+            <p class="topless"><a href="workflows.html"
+                                  title="previous chapter">Workflows</a></p>
+            <h4>Next topic</h4>
+            <p class="topless"><a href="superprojects.html"
+                                  title="next chapter">Superprojects</a></p>
+            <h3>This Page</h3>
+            <ul class="this-page-menu">
+              <li><a href="_sources/dependency-management.txt"
+                     rel="nofollow">Show Source</a></li>
+            </ul>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="dependency-management">
+<h1>Dependency Management<a class="headerlink" href="#dependency-management" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="the-graph">
+<h2>The Graph<a class="headerlink" href="#the-graph" title="Permalink to this headline">¶</a></h2>
+<p>This configuration of dependencies should be enough to uncover many of the edge cases.</p>
+<p class="graphviz">
+<img src="_images/graphviz-15c21ba5292562afef164e15935fb5e70fab7d3a.png" alt="digraph lib_dependencies {
+&quot;libA&quot; -&gt; &quot;libC&quot;
+&quot;libA&quot; -&gt; &quot;libX&quot;
+&quot;libB&quot; -&gt; &quot;libX&quot;
+&quot;proj&quot; -&gt; &quot;libA&quot;
+&quot;proj&quot; -&gt; &quot;libB&quot;
+}" />
+</p>
+<p><em>proj</em> is a project that might not be hosted at ryppl. <em>libA</em>, <em>libB</em>,
+<em>libC</em>, and <em>libX</em> are ryppl library projects.</p>
+</div>
+<div class="section" id="the-ryppl-directory">
+<h2>The <tt class="docutils literal"><span class="pre">.ryppl</span></tt> Directory<a class="headerlink" href="#the-ryppl-directory" title="Permalink to this headline">¶</a></h2>
+<p>At the top level of each ryppl project sits a directory called
+<tt class="docutils literal"><span class="pre">.ryppl</span></tt>, containing <tt class="docutils literal"><span class="pre">METADATA</span></tt> file as <a class="reference external" href="http://www.python.org/dev/peps/pep-0376/#one-dist-info-directory-per-installed-distribution">described</a> in <a class="reference external" href="http://www.python.org/dev/peps/pep-0376">PEP 376</a>.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Today, the only difference between a <tt class="docutils literal"><span class="pre">.ryppl</span></tt> directory
+and a <tt class="docutils literal"><span class="pre">.dist-info</span></tt> directory as <a class="reference external" href="http://www.python.org/dev/peps/pep-0376/#one-dist-info-directory-per-installed-distribution">described</a> in <a class="reference external" href="http://www.python.org/dev/peps/pep-0376">PEP 376</a> is the
+directory name.  We are prepared to extend the contents of the
+<tt class="docutils literal"><span class="pre">.ryppl</span></tt> directory by adding files if necessary.</p>
+</div>
+</div>
+<div class="section" id="specifics-of-setup">
+<h2>Specifics of Setup<a class="headerlink" href="#specifics-of-setup" title="Permalink to this headline">¶</a></h2>
+<p>The developer of <em>libA</em> has a <tt class="docutils literal"><span class="pre">.ryppl/METADATA</span></tt> file to his project at the top level:</p>
+<div class="highlight-python"><pre>Requires-Dist: libX (&gt;=1.0,!=3.0,&lt;=3.1)
+Requires-Dist: libC</pre>
+</div>
+<p>This specifies a dependency on a version of libX numbered 1.0 through
+3.1, excluding 3.0 (or the 3.0.x series if versions of <em>libA</em> have
+three numeric parts).</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p>A well formed version number has the following format:</p>
+<blockquote>
+N.N[.N]+[{a|b|c|rc}N[.N]+][.postN][.devN]</blockquote>
+<p>where the only mandatory parts are the initial N.N.</p>
+<p class="last">This is the same format accepted for Python versioning schema, see
+<a class="reference external" href="http://www.python.org/dev/peps/pep-0386/">PEP 386</a> for a
+thorough explanation.  This choice covers the vast majority of
+cases (up to development, post-release versions) and allows for
+comparisons.</p>
+</div>
+<p><em>libB</em> has a similar <tt class="docutils literal"><span class="pre">.ryppl/METADATA</span></tt> file:</p>
+<div class="highlight-python"><pre>Requires-Dist: libX:2.0-2.5,3.0</pre>
+</div>
+<p>The person developing <em>proj</em> does:</p>
+<div class="highlight-python"><pre>~/proj% ryppl get libA libB</pre>
+</div>
+<p>This will pull down the latest release of <em>libA</em>, <em>libB</em>, and <em>libC</em> and version 2.2 of <em>libX</em>, since it's the latest version
+compatible with both the latest <em>libA</em> and <em>libB</em>.</p>
+<p>Alternatively, the developer of <em>proj</em> can have his own <tt class="docutils literal"><span class="pre">.ryppl/METADATA</span></tt> file:</p>
+<div class="highlight-python"><pre>Requires-Dist: libA
+Requires-Dist: libB</pre>
+</div>
+<p>and simply execute:</p>
+<div class="highlight-python"><pre>~/proj% ryppl</pre>
+</div>
+<p>In case of conflicts,where the latest <em>libA</em> and <em>libB</em> are not
+compatible with any common version of <em>libX</em>, the user should be
+offered options</p>
+<ul class="simple">
+<li>Abort</li>
+<li>Look for earlier versions of <em>libA</em> and <em>libB</em> that are compatible</li>
+<li>Fall back to a guess about a compatible <em>libX</em></li>
+</ul>
+<p>The default assumption should be that later versions don't break
+backward-compatibility, so a project that depends on v2.0 of <em>libX</em>
+will also work with v3.0.</p>
+</div>
+<div class="section" id="events">
+<h2>Events<a class="headerlink" href="#events" title="Permalink to this headline">¶</a></h2>
+<p>Now we'll look at a number of things that might happen.  A set of
+changes to be applied will be referred to here as a “patch,” even if
+not expressed or completely expressible as a patch file.</p>
+<div class="section" id="developer-update">
+<h3>Developer Update<a class="headerlink" href="#developer-update" title="Permalink to this headline">¶</a></h3>
+<p>Library developer propagates a patch “downstream” (from library
+dependency to dependent project).  Propagation can either be</p>
+<ul class="simple">
+<li>a <strong>release</strong>, where a patch becomes part of one or more named
+categories of updates (e.g. “critical update,” “beta,” “version
+upgrade,” etc.) known as a <em>release branch</em> that can be subscribed
+to by users and automatically applied.</li>
+<li>a <strong>downstream test request</strong>, where specific users are asked to try
+a patch, but it is not “released” for general consumption.  The
+patch gets its own name and is not (yet) part of a release branch.</li>
+</ul>
+<p>Downstream patch propagation will cause some automatic source merging
+when downstream subscribers.  Some of the (likely) working tree states being
+employed by users may be known to the upstream developer, e.g. the
+HEADs of any release branches are likely candidates.</p>
+<p><em>Ideally</em> we'd like to (optionally) automatically test compatibility
+of any patch with these known downstream states at two levels—a test
+for a clean merge or a full regression test—but these don't seem like
+“priority 1” features.</p>
+<p>Regardless, downstream merges will sometimes fail, or fail to work.
+In these cases, it is crucial that downstream users' working tree
+states are restored.  Such failures should be automatically reported
+upstream in a way that allows the upstream developer to correct them.</p>
+</div>
+<div class="section" id="user-update">
+<h3>User Update<a class="headerlink" href="#user-update" title="Permalink to this headline">¶</a></h3>
+<p>The developer of <em>proj</em> patches one of the libraries on which <em>proj</em>
+depends.</p>
+<p>The change will be checked into the user's repository, and persists
+there until integrated upstream.  Upstream integration works as
+follows:</p>
+<ol class="arabic simple">
+<li>Ryppl locates the nearest ancestor of user's working state that
+exists in developer's repo and creates a patch branch there.</li>
+<li>Ryppl applies patch to patch branch</li>
+<li>Ryppl switches user to patch branch and rebases any other user
+changes.</li>
+</ol>
+<p>This should all happen without modification of user's patch.</p>
+<p>If developer wants to make modifications before merging back into a
+release branch, she is free to do so, but this should be done as
+follow-up checkins on the patch branch, and requests for a
+pull+update+test should be sent automatically to user.</p>
+<p>Merge to release branch should similarly automatically notify user,
+with the option for automatic or manual switching of user's working
+tree state to the release branch.</p>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="superprojects.html" title="Superprojects"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="workflows.html" title="Workflows"
+             >previous</a> |</li>
+        <li><a href="index.html">Ryppl</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+      &copy; Copyright 2009-2010, troy d. straszheim and david abrahams --  Version 0a92bff13e5d792b6f289ef2377edb5ebfb40da7, Wed, 14 Jul 2010.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 0.6.5.
+    </div>
+  </body>
+</html>

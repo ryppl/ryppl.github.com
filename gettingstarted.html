@@ -1,0 +1,303 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Getting Started With Modularized Boost &mdash; Ryppl</title>
+    <link rel="stylesheet" href="_static/sphinxdoc.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '#',
+        VERSION:     '0.0',
+        COLLAPSE_MODINDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="top" title="Ryppl" href="index.html" />
+    <link rel="next" title="Making Changes to a Modularized Boost Library" href="modifying_the_python_lib.html" />
+    <link rel="prev" title="Superprojects" href="superprojects.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="modifying_the_python_lib.html" title="Making Changes to a Modularized Boost Library"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="superprojects.html" title="Superprojects"
+             accesskey="P">previous</a> |</li>
+        <li><a href="index.html">Ryppl</a> &raquo;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+            <p class="logo"><a href="index.html">
+              <img class="logo" src="_static/ryppl.png" alt="Logo"/>
+            </a></p>
+            <h3><a href="index.html">Table Of Contents</a></h3>
+            <ul>
+<li><a class="reference external" href="#">Getting Started With Modularized Boost</a><ul>
+<li><a class="reference external" href="#clone-the-boost-superproject">Clone the Boost superproject</a></li>
+<li><a class="reference external" href="#initialize-and-update-the-submodules">Initialize and update the submodules</a></li>
+<li><a class="reference external" href="#run-cmake-and-generate-forwarding-headers">Run cmake and generate forwarding headers</a></li>
+<li><a class="reference external" href="#build">Build</a></li>
+</ul>
+</li>
+</ul>
+
+            <h4>Previous topic</h4>
+            <p class="topless"><a href="superprojects.html"
+                                  title="previous chapter">Superprojects</a></p>
+            <h4>Next topic</h4>
+            <p class="topless"><a href="modifying_the_python_lib.html"
+                                  title="next chapter">Making Changes to a Modularized Boost Library</a></p>
+            <h3>This Page</h3>
+            <ul class="this-page-menu">
+              <li><a href="_sources/gettingstarted.txt"
+                     rel="nofollow">Show Source</a></li>
+            </ul>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="getting-started-with-modularized-boost">
+<span id="getting-started"></span><h1>Getting Started With Modularized Boost<a class="headerlink" href="#getting-started-with-modularized-boost" title="Permalink to this headline">¶</a></h1>
+<p>Boost is organized in Git as a “superproject” containing <a class="reference external" href="http://progit.org/book/ch6-6.html">submodules</a>, each of which corresponds to an
+individual Boost library. <a class="footnote-reference" href="#submodule" id="id1">[1]</a>  A <strong>submodule</strong> is a <em>reference</em> to a
+commit in an <em>independent</em> Git repository.  The submodule is used by
+Git to clone the independent repository below the superproject's root
+directory, and check out the referenced commit.</p>
+<div class="section" id="clone-the-boost-superproject">
+<h2>Clone the Boost superproject<a class="headerlink" href="#clone-the-boost-superproject" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-git_shell"><div class="highlight"><pre><span class="go">git</span><span class="g-Whitespace"> </span><span class="go">clone</span><span class="g-Whitespace"> </span><span class="ow">git://gitorious.org/ryppl/boost.git</span><span class="g-Whitespace"> </span><span class="go">boost-ryppl</span><span class="g-Whitespace"></span>
+</pre></div>
+</div>
+<p>This will clone the rypplized boost <em>superproject</em> and place the
+result in the top-level workspace directory <tt class="docutils literal"><span class="pre">boost-ryppl/</span></tt>.  Have a look at
+the contents.  Most of boost is there, but:</p>
+<ul>
+<li><p class="first">In <tt class="docutils literal"><span class="pre">boost-ryppl/</span></tt> there is a file <tt class="docutils literal"><span class="pre">.gitmodules</span></tt> that maps local
+directories to remote git repositories:</p>
+<div class="highlight-git_shell"><div class="highlight"><pre><span class="go">[submodule</span><span class="g-Whitespace"> </span><span class="s2">&quot;src/accumulators&quot;</span><span class="go">]</span><span class="g-Whitespace"></span>
+<span class="g-Whitespace">    </span><span class="go">path</span><span class="g-Whitespace"> </span><span class="go">=</span><span class="g-Whitespace"> </span><span class="go">src/accumulators</span><span class="g-Whitespace"></span>
+<span class="g-Whitespace">    </span><span class="go">url</span><span class="g-Whitespace"> </span><span class="go">=</span><span class="g-Whitespace"> </span><span class="ow">git://gitorious.org/boost/accumulators.git</span><span class="g-Whitespace"></span>
+<span class="go">[submodule</span><span class="g-Whitespace"> </span><span class="s2">&quot;src/algorithm&quot;</span><span class="go">]</span><span class="g-Whitespace"></span>
+<span class="g-Whitespace">    </span><span class="go">path</span><span class="g-Whitespace"> </span><span class="go">=</span><span class="g-Whitespace"> </span><span class="go">src/algorithm</span><span class="g-Whitespace"></span>
+<span class="g-Whitespace">    </span><span class="go">url</span><span class="g-Whitespace"> </span><span class="go">=</span><span class="g-Whitespace"> </span><span class="ow">git://gitorious.org/boost/algorithm.git</span><span class="g-Whitespace"></span>
+<span class="go">etc</span><span class="g-Whitespace"></span>
+</pre></div>
+</div>
+</li>
+<li><p class="first">Under <tt class="docutils literal"><span class="pre">src</span></tt> there is an empty subdirectory for each boost library</p>
+</li>
+<li><p class="first">The command <tt class="docutils literal"><span class="pre">git</span> <span class="pre">submodule</span> <span class="pre">status</span></tt> gives the commits at which each
+submodule should be cloned:</p>
+</li>
+</ul>
+<pre class="literal-block">
+% git submodule status
+-10ac085df521b4b294afa074e296252fabd1735b src/accumulators
+-08578dcec8e5be7365e83107cae6f9240e215ed3 src/algorithm
+-d037b2069c9cce96f019b02a631a51a47970bc02 src/any
+-795ab423fecb41dba2e4e6a8be6ee8089d78136b src/array
+<em>etc…</em>
+</pre>
+</div>
+<div class="section" id="initialize-and-update-the-submodules">
+<h2>Initialize and update the submodules<a class="headerlink" href="#initialize-and-update-the-submodules" title="Permalink to this headline">¶</a></h2>
+<p>Issue the command <tt class="docutils literal"><span class="pre">git</span> <span class="pre">submodule</span> <span class="pre">init</span></tt> followed by <tt class="docutils literal"><span class="pre">git</span> <span class="pre">submodule</span> <span class="pre">update</span></tt>:</p>
+<pre class="literal-block">
+% git submodule init
+Submodule 'src/accumulators' (git://gitorious.org/boost/accumulators.git) registered for path 'src/accumulators'
+Submodule 'src/algorithm' (git://gitorious.org/boost/algorithm.git) registered for path 'src/algorithm'
+Submodule 'src/any' (git://gitorious.org/boost/any.git) registered for path 'src/any'
+Submodule 'src/array' (git://gitorious.org/boost/array.git) registered for path 'src/array'
+
+<em>etc…</em>
+
+% git submodule update
+Initialized empty Git repository in /tmp/boost-ryppl/cmake/.git/
+Submodule path 'cmake': checked out '6dce83c277d48644fac187799876799eb66c97a2'
+
+<em>etc…</em>
+</pre>
+<p>There will be alot of output...  Git has checked out each submodule to
+its corresponding directory inside the superproject, and.</p>
+<p>Now notice that the git submodule status now <em>has</em> changed:</p>
+<div class="highlight-git_shell"><div class="highlight"><pre><span class="k">% git</span><span class="g-Whitespace"> </span><span class="gd">submodule status</span>
+<span class="mh">6dce83c277d48644fac187799876799eb66c97a2</span><span class="g-Whitespace"> </span><span class="go">cmake</span><span class="g-Whitespace"> </span><span class="go">(heads/master)</span><span class="g-Whitespace"></span>
+<span class="mh">0628a7a2d999bbbd62fd9877922c057f5f056114</span><span class="g-Whitespace"> </span><span class="go">src/accumulators</span><span class="g-Whitespace"> </span><span class="go">(remotes/origin/1.41.0)</span><span class="g-Whitespace"></span>
+<span class="mh">5cec8044c5408fadee71110194027b0e99b44721</span><span class="g-Whitespace"> </span><span class="go">src/algorithm</span><span class="g-Whitespace"> </span><span class="go">(remotes/origin/1.41.0)</span><span class="g-Whitespace"></span>
+<span class="mh">d58030ef644dc992db31fc2bd6fe3a985468eb4b</span><span class="g-Whitespace"> </span><span class="go">src/any</span><span class="g-Whitespace"> </span><span class="go">(remotes/origin/1.41.0)</span><span class="g-Whitespace"></span>
+</pre></div>
+</div>
+<p>The minus sign to the left of the hash has disappeared, and a branch
+(in parenthesis) has appeared on the right.</p>
+<p>Also, the submodule directories now contain code:</p>
+<div class="highlight-git_shell"><div class="highlight"><pre><span class="go">%</span><span class="g-Whitespace"> </span><span class="go">ls</span><span class="g-Whitespace"> </span><span class="go">src/regex</span><span class="g-Whitespace"></span>
+<span class="go">CMakeLists.txt</span><span class="g-Whitespace">        </span><span class="go">example/</span><span class="g-Whitespace">        </span><span class="go">module.cmake</span><span class="g-Whitespace">    </span><span class="go">src/</span><span class="g-Whitespace"></span>
+<span class="go">build/</span><span class="g-Whitespace">                </span><span class="go">include/</span><span class="g-Whitespace">        </span><span class="go">performance/</span><span class="g-Whitespace">    </span><span class="go">test/</span><span class="g-Whitespace"></span>
+<span class="go">doc/</span><span class="g-Whitespace">          </span><span class="go">index.html</span><span class="g-Whitespace">      </span><span class="go">README.txt</span><span class="g-Whitespace">      </span><span class="go">tools/</span><span class="g-Whitespace"></span>
+</pre></div>
+</div>
+<p>Now you have a Boost workspace nearly ready to build.</p>
+</div>
+<div class="section" id="run-cmake-and-generate-forwarding-headers">
+<h2>Run cmake and generate forwarding headers<a class="headerlink" href="#run-cmake-and-generate-forwarding-headers" title="Permalink to this headline">¶</a></h2>
+<p>Create a build directory outside your source tree and run CMake there.
+This step inspects your system configuration, finding installed
+libraries, tools, etc., and generates appropriate makefiles for Boost:</p>
+<pre class="literal-block">
+% mkdir ../build-ryppl
+% cd ../build-ryppl
+% cmake ../boost-ryppl
+-- The C compiler identification is GNU
+-- The CXX compiler identification is GNU
+
+<em>[ etc ]</em>
+
+--
+-- Reading boost project directories (per BUILD_PROJECTS)
+--
+-- + preprocessor
+-- + concept_check
+
+<em>[ etc… note that 'chrono', 'process', etc appear in this list ]</em>
+
+-- + wave
+--
+-- BUILD_TESTS is NONE: skipping test directories.
+--
+--
+-- BUILD_TOOLS is NONE: skipping tools.
+--
+-- Configuring done
+-- Generating done
+-- Build files have been written to: <em>absolute-path-to-..</em>/build-ryppl
+</pre>
+<p>The last step is to generate forwarding headers.  This technique is
+borrowed from the smart guys at Trolltech <tt class="docutils literal"><span class="pre">Qt</span></tt> toolkit.  Make the
+target <strong>genheaders</strong>:</p>
+<pre class="literal-block">
+% make genheaders
+Scanning dependencies of target genheaders
+Generating central header directory
+Projects located under     :  <em>absolute-path-to-..</em>/boost-ryppl
+Fwding headers generated in:  <em>absolute-path-to-..</em>/build-ryppl/include
+
+              serialization:  178
+                  smart_ptr:  59
+               accumulators:  81
+
+                   <em>[etc etc]</em>
+
+                 scope_exit:  1
+                        mpl:  1041
+                     assign:  16
+Built target genheaders
+</pre>
+<p>Now you'll notice that a  directory <tt class="docutils literal"><span class="pre">boost-ryppl/include</span></tt>
+exists and is full of headers:</p>
+<div class="highlight-git_shell"><div class="highlight"><pre><span class="go">%</span><span class="g-Whitespace"> </span><span class="go">ls</span><span class="g-Whitespace"> </span><span class="go">include/boost</span><span class="g-Whitespace"></span>
+<span class="go">accumulators/</span><span class="g-Whitespace">                 </span><span class="go">multi_array/</span><span class="g-Whitespace"></span>
+<span class="go">algorithm/</span><span class="g-Whitespace">                    </span><span class="go">multi_array.hpp</span><span class="g-Whitespace"></span>
+<span class="go">aligned_storage.hpp</span><span class="g-Whitespace">           </span><span class="go">multi_index/</span><span class="g-Whitespace"></span>
+
+<span class="go">[etc]</span><span class="g-Whitespace"></span>
+
+<span class="go">memory_order.hpp</span><span class="g-Whitespace">              </span><span class="go">wave/</span><span class="g-Whitespace"></span>
+<span class="go">mpi/</span><span class="g-Whitespace">                          </span><span class="go">wave.hpp</span><span class="g-Whitespace"></span>
+<span class="go">mpi.hpp</span><span class="g-Whitespace">                       </span><span class="go">weak_ptr.hpp</span><span class="g-Whitespace"></span>
+<span class="go">mpl/</span><span class="g-Whitespace">                          </span><span class="go">xpressive/</span><span class="g-Whitespace"></span>
+</pre></div>
+</div>
+<p>And that each file simply forwards to the project from whence it
+came:</p>
+<div class="highlight-git_shell"><div class="highlight"><pre><span class="go">%</span><span class="g-Whitespace"> </span><span class="go">cat</span><span class="g-Whitespace"> </span><span class="go">../include/boost/wave.hpp</span><span class="g-Whitespace"></span>
+<span class="c">#include &quot;../../src/wave/include/boost/wave.hpp&quot;</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="build">
+<h2>Build<a class="headerlink" href="#build" title="Permalink to this headline">¶</a></h2>
+<p>Now you can build.  To find the names of all available targets, make
+the <cite>help</cite> target:</p>
+<pre class="literal-block">
+% make help
+The following are some of the valid targets for this Makefile:
+... all (the default if no target is provided)
+... clean
+... depend
+... edit_cache
+... genheaders
+... install
+... install/local
+... install/strip
+... list_install_components
+... rebuild_cache
+... test
+... boost_date_time
+... boost_date_time-mt-shared
+... boost_date_time-mt-shared-debug
+... boost_date_time-mt-static
+... boost_date_time-mt-static-debug
+... boost_thread
+<em>etc</em>
+
+% make boost_date_time
+[  0%] Built target boost_date_time-mt-static-debug
+[  0%] Built target boost_date_time-mt-shared-debug
+[  0%] Built target boost_date_time-mt-shared
+[100%] Built target boost_date_time-mt-static
+[100%] Built target boost_date_time
+</pre>
+<table class="docutils footnote" frame="void" id="submodule" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id1">[1]</a></td><td>This organization will change soon; see <a class="reference external" href="../superprojects.html#id1">this note</a> for rationale</td></tr>
+</tbody>
+</table>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="modifying_the_python_lib.html" title="Making Changes to a Modularized Boost Library"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="superprojects.html" title="Superprojects"
+             >previous</a> |</li>
+        <li><a href="index.html">Ryppl</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+      &copy; Copyright 2009-2010, troy d. straszheim and david abrahams --  Version 0a92bff13e5d792b6f289ef2377edb5ebfb40da7, Wed, 14 Jul 2010.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 0.6.5.
+    </div>
+  </body>
+</html>
