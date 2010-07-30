@@ -1,3 +1,5 @@
+
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
@@ -10,14 +12,15 @@
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
-        URL_ROOT:    '#',
+        URL_ROOT:    '',
         VERSION:     '0.0',
-        COLLAPSE_MODINDEX: false,
+        COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
       };
     </script>
     <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
     <script type="text/javascript" src="_static/doctools.js"></script>
     <link rel="top" title="Ryppl" href="index.html" />
     <link rel="next" title="Making Changes to a Modularized Boost Library" href="modifying_the_python_lib.html" />
@@ -44,28 +47,28 @@
             <p class="logo"><a href="index.html">
               <img class="logo" src="_static/ryppl.png" alt="Logo"/>
             </a></p>
-            <h3><a href="index.html">Table Of Contents</a></h3>
-            <ul>
-<li><a class="reference external" href="#">Getting Started With Modularized Boost</a><ul>
-<li><a class="reference external" href="#clone-the-boost-superproject">Clone the Boost superproject</a></li>
-<li><a class="reference external" href="#initialize-and-update-the-submodules">Initialize and update the submodules</a></li>
-<li><a class="reference external" href="#run-cmake-and-generate-forwarding-headers">Run cmake and generate forwarding headers</a></li>
-<li><a class="reference external" href="#build">Build</a></li>
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Getting Started With Modularized Boost</a><ul>
+<li><a class="reference internal" href="#clone-the-boost-superproject">Clone the Boost superproject</a></li>
+<li><a class="reference internal" href="#initialize-and-update-the-submodules">Initialize and update the submodules</a></li>
+<li><a class="reference internal" href="#run-cmake-and-generate-forwarding-headers">Run cmake and generate forwarding headers</a></li>
+<li><a class="reference internal" href="#build">Build</a></li>
 </ul>
 </li>
 </ul>
 
-            <h4>Previous topic</h4>
-            <p class="topless"><a href="superprojects.html"
-                                  title="previous chapter">Superprojects</a></p>
-            <h4>Next topic</h4>
-            <p class="topless"><a href="modifying_the_python_lib.html"
-                                  title="next chapter">Making Changes to a Modularized Boost Library</a></p>
-            <h3>This Page</h3>
-            <ul class="this-page-menu">
-              <li><a href="_sources/gettingstarted.txt"
-                     rel="nofollow">Show Source</a></li>
-            </ul>
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="superprojects.html"
+                        title="previous chapter">Superprojects</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="modifying_the_python_lib.html"
+                        title="next chapter">Making Changes to a Modularized Boost Library</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="_sources/gettingstarted.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
         </div>
       </div>
 
@@ -83,7 +86,7 @@ Git to clone the independent repository below the superproject's root
 directory, and check out the referenced commit.</p>
 <div class="section" id="clone-the-boost-superproject">
 <h2>Clone the Boost superproject<a class="headerlink" href="#clone-the-boost-superproject" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-git_shell"><div class="highlight"><pre><span class="go">git</span><span class="g-Whitespace"> </span><span class="go">clone</span><span class="g-Whitespace"> </span><span class="ow">git://gitorious.org/ryppl/boost.git</span><span class="g-Whitespace"> </span><span class="go">boost-ryppl</span><span class="g-Whitespace"></span>
+<div class="highlight-git_shell"><div class="highlight"><pre><span class="go">git</span><span class="g-Whitespace"> </span><span class="go">clone</span><span class="g-Whitespace"> </span><span class="ow">git://github.com/boost-lib/boost.git</span><span class="g-Whitespace"> </span><span class="go">boost-ryppl</span><span class="g-Whitespace"></span>
 </pre></div>
 </div>
 <p>This will clone the rypplized boost <em>superproject</em> and place the
@@ -94,10 +97,10 @@ the contents.  Most of boost is there, but:</p>
 directories to remote git repositories:</p>
 <div class="highlight-git_shell"><div class="highlight"><pre><span class="go">[submodule</span><span class="g-Whitespace"> </span><span class="s2">&quot;src/accumulators&quot;</span><span class="go">]</span><span class="g-Whitespace"></span>
 <span class="g-Whitespace">    </span><span class="go">path</span><span class="g-Whitespace"> </span><span class="go">=</span><span class="g-Whitespace"> </span><span class="go">src/accumulators</span><span class="g-Whitespace"></span>
-<span class="g-Whitespace">    </span><span class="go">url</span><span class="g-Whitespace"> </span><span class="go">=</span><span class="g-Whitespace"> </span><span class="ow">git://gitorious.org/boost/accumulators.git</span><span class="g-Whitespace"></span>
+<span class="g-Whitespace">    </span><span class="go">url</span><span class="g-Whitespace"> </span><span class="go">=</span><span class="g-Whitespace"> </span><span class="ow">git://github.com/boost-lib/accumulators.git</span><span class="g-Whitespace"></span>
 <span class="go">[submodule</span><span class="g-Whitespace"> </span><span class="s2">&quot;src/algorithm&quot;</span><span class="go">]</span><span class="g-Whitespace"></span>
 <span class="g-Whitespace">    </span><span class="go">path</span><span class="g-Whitespace"> </span><span class="go">=</span><span class="g-Whitespace"> </span><span class="go">src/algorithm</span><span class="g-Whitespace"></span>
-<span class="g-Whitespace">    </span><span class="go">url</span><span class="g-Whitespace"> </span><span class="go">=</span><span class="g-Whitespace"> </span><span class="ow">git://gitorious.org/boost/algorithm.git</span><span class="g-Whitespace"></span>
+<span class="g-Whitespace">    </span><span class="go">url</span><span class="g-Whitespace"> </span><span class="go">=</span><span class="g-Whitespace"> </span><span class="ow">git://github.com/boost-lib/algorithm.git</span><span class="g-Whitespace"></span>
 <span class="go">etc</span><span class="g-Whitespace"></span>
 </pre></div>
 </div>
@@ -122,10 +125,10 @@ submodule should be cloned:</p>
 <p>Issue the command <tt class="docutils literal"><span class="pre">git</span> <span class="pre">submodule</span> <span class="pre">init</span></tt> followed by <tt class="docutils literal"><span class="pre">git</span> <span class="pre">submodule</span> <span class="pre">update</span></tt>:</p>
 <pre class="literal-block">
 % git submodule init
-Submodule 'src/accumulators' (git://gitorious.org/boost/accumulators.git) registered for path 'src/accumulators'
-Submodule 'src/algorithm' (git://gitorious.org/boost/algorithm.git) registered for path 'src/algorithm'
-Submodule 'src/any' (git://gitorious.org/boost/any.git) registered for path 'src/any'
-Submodule 'src/array' (git://gitorious.org/boost/array.git) registered for path 'src/array'
+Submodule 'src/accumulators' (git://github.com/boost-lib/accumulators.git) registered for path 'src/accumulators'
+Submodule 'src/algorithm' (git://github.com/boost-lib/algorithm.git) registered for path 'src/algorithm'
+Submodule 'src/any' (git://github.com/boost-lib.git) registered for path 'src/any'
+Submodule 'src/array' (git://github.com/boost-lib/array.git) registered for path 'src/array'
 
 <em>etc…</em>
 
@@ -210,7 +213,7 @@ Fwding headers generated in:  <em>absolute-path-to-..</em>/build-ryppl/include
                      assign:  16
 Built target genheaders
 </pre>
-<p>Now you'll notice that a  directory <tt class="docutils literal"><span class="pre">boost-ryppl/include</span></tt>
+<p>Now you'll notice that a  directory <tt class="docutils literal"><span class="pre">build-ryppl/include</span></tt>
 exists and is full of headers:</p>
 <div class="highlight-git_shell"><div class="highlight"><pre><span class="go">%</span><span class="g-Whitespace"> </span><span class="go">ls</span><span class="g-Whitespace"> </span><span class="go">include/boost</span><span class="g-Whitespace"></span>
 <span class="go">accumulators/</span><span class="g-Whitespace">                 </span><span class="go">multi_array/</span><span class="g-Whitespace"></span>
@@ -296,8 +299,8 @@ The following are some of the valid targets for this Makefile:
       </ul>
     </div>
     <div class="footer">
-      &copy; Copyright 2009-2010, troy d. straszheim and david abrahams --  Version 0a92bff13e5d792b6f289ef2377edb5ebfb40da7, Wed, 14 Jul 2010.
-      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 0.6.5.
+        &copy; Copyright 2009-2010, troy d. straszheim and david abrahams --  Version 5d6cb06ae1d828dbf47188ca9285e7137cda2775, Fri, 30 Jul 2010.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.0.1.
     </div>
   </body>
 </html>

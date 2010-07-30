@@ -1,3 +1,5 @@
+
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
@@ -10,14 +12,15 @@
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
-        URL_ROOT:    '#',
+        URL_ROOT:    '',
         VERSION:     '0.0',
-        COLLAPSE_MODINDEX: false,
+        COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
       };
     </script>
     <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
     <script type="text/javascript" src="_static/doctools.js"></script>
     <link rel="top" title="Ryppl" href="index.html" />
     <link rel="next" title="SVN Command equivalents" href="svn_equivs.html" />
@@ -44,25 +47,25 @@
             <p class="logo"><a href="index.html">
               <img class="logo" src="_static/ryppl.png" alt="Logo"/>
             </a></p>
-            <h3><a href="index.html">Table Of Contents</a></h3>
-            <ul>
-<li><a class="reference external" href="#">Making Changes to a Modularized Boost Library</a><ul>
-<li><a class="reference external" href="#make-and-push-modifications-to-your-python-project">Make and push modifications to your python project</a></li>
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Making Changes to a Modularized Boost Library</a><ul>
+<li><a class="reference internal" href="#make-and-push-modifications-to-your-python-project">Make and push modifications to your python project</a></li>
 </ul>
 </li>
 </ul>
 
-            <h4>Previous topic</h4>
-            <p class="topless"><a href="gettingstarted.html"
-                                  title="previous chapter">Getting Started With Modularized Boost</a></p>
-            <h4>Next topic</h4>
-            <p class="topless"><a href="svn_equivs.html"
-                                  title="next chapter">SVN Command equivalents</a></p>
-            <h3>This Page</h3>
-            <ul class="this-page-menu">
-              <li><a href="_sources/modifying_the_python_lib.txt"
-                     rel="nofollow">Show Source</a></li>
-            </ul>
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="gettingstarted.html"
+                        title="previous chapter">Getting Started With Modularized Boost</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="svn_equivs.html"
+                        title="next chapter">SVN Command equivalents</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="_sources/modifying_the_python_lib.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
         </div>
       </div>
 
@@ -79,38 +82,36 @@ intention of eventually making a merge request to the project's owner.</p>
 <p class="first admonition-title">Warning</p>
 <p class="last">Do these steps in order!!!</p>
 </div>
-<p class="rubric">Clone the Boost superproject on Gitorious</p>
-<p>Make a clone of boost on gitorious, using the &quot;Clone this repository
-on gitorious&quot; link on <a class="reference external" href="http://gitorious.org/ryppl/boost">ryppl's gitorious page</a>.  Later this will contain a
+<p class="rubric">Clone the Boost superproject on Github</p>
+<p>Make a clone of boost on github, using the &quot;Fork&quot; link on
+<a class="reference external" href="http://github.com/boost-lib/boost">ryppl's github page</a>.  Later this will contain a
 modified submodule pointing to our clone of python, which we will
 create later.  The other Boost library submodules will continue to
-refer to their standard “official” locations.  I have called mine
-<em>straszheims-ryppl</em>, here:
-<a class="reference external" href="http://gitorious.org/~straszheim/ryppl/straszheims-ryppl">http://gitorious.org/~straszheim/ryppl/straszheims-ryppl</a></p>
-<p class="rubric">Clone the Boost.Python project on gitorious</p>
+refer to their standard “official” locations.</p>
+<p class="rubric">Clone the Boost.Python project on github</p>
 <p>Using the same procedure as .above, clone the python project.  The
-clone button is on <a class="reference external" href="http://gitorious.org/boost/python">this page</a>.</p>
+Fork button is on <a class="reference external" href="http://github.com/boost-lib/python">this page</a>.</p>
 <p class="rubric">Clone your Boost clone the local
 machine</p>
-<p>See <a class="reference external" href="gettingstarted.html#getting-started"><em>Getting Started With Modularized Boost</em></a>, using the url of your clone on gitorious.
+<p>See <a class="reference internal" href="gettingstarted.html#getting-started"><em>Getting Started With Modularized Boost</em></a>, using the url of your clone on github.
 .. That sentence should be made clearer, but it may be best just to
 .. repeat the instructions here so the poor reader doesn't have to
 .. bounce around with hyperlinks.
 The following steps will take place inside the local clone.</p>
 <p class="rubric">Remove the old submodule</p>
-<p>Remove these lines from <tt class="docutils literal"><span class="pre">.gitmodules</span></tt>:</p>
+<p>Remove these lines from <tt class="file docutils literal"><span class="pre">.gitmodules</span></tt>:</p>
 <div class="highlight-git_shell"><div class="highlight"><pre><span class="go">[submodule</span><span class="g-Whitespace"> </span><span class="s2">&quot;src/python&quot;</span><span class="go">]</span><span class="g-Whitespace"></span>
 <span class="g-Whitespace">        </span><span class="go">path</span><span class="g-Whitespace"> </span><span class="go">=</span><span class="g-Whitespace"> </span><span class="go">src/python</span><span class="g-Whitespace"></span>
-<span class="g-Whitespace">        </span><span class="go">url</span><span class="g-Whitespace"> </span><span class="go">=</span><span class="g-Whitespace"> </span><span class="ow">git://gitorious.org/boost/python.git</span><span class="g-Whitespace"></span>
+<span class="g-Whitespace">        </span><span class="go">url</span><span class="g-Whitespace"> </span><span class="go">=</span><span class="g-Whitespace"> </span><span class="ow">git://github.com/boost-lib/python.git</span><span class="g-Whitespace"></span>
 </pre></div>
 </div>
-<p>Add <tt class="docutils literal"><span class="pre">.gitmodules</span></tt> to the pending commit:</p>
+<p>Add <tt class="file docutils literal"><span class="pre">.gitmodules</span></tt> to the pending commit:</p>
 <div class="highlight-git_shell"><div class="highlight"><pre><span class="go">git</span><span class="g-Whitespace"> </span><span class="go">add</span><span class="g-Whitespace"> </span><span class="go">.gitmodules</span><span class="g-Whitespace"></span>
 </pre></div>
 </div>
-<p>Remove these lines from <tt class="docutils literal"><span class="pre">.git/config</span></tt>:</p>
+<p>Remove these lines from <tt class="file docutils literal"><span class="pre">.git/config</span></tt>:</p>
 <div class="highlight-git_shell"><div class="highlight"><pre><span class="go">[submodule</span><span class="g-Whitespace"> </span><span class="s2">&quot;src/python&quot;</span><span class="go">]</span><span class="g-Whitespace"></span>
-<span class="g-Whitespace">        </span><span class="go">url</span><span class="g-Whitespace"> </span><span class="go">=</span><span class="g-Whitespace"> </span><span class="ow">git://gitorious.org/boost/python.git</span><span class="g-Whitespace"></span>
+<span class="g-Whitespace">        </span><span class="go">url</span><span class="g-Whitespace"> </span><span class="go">=</span><span class="g-Whitespace"> </span><span class="ow">git://github.com/boost-lib/python.git</span><span class="g-Whitespace"></span>
 </pre></div>
 </div>
 <p>This is just for cleanliness, not part of the commit.</p>
@@ -155,8 +156,8 @@ The following steps will take place inside the local clone.</p>
 </pre></div>
 </div>
 <p>Now add the new one:</p>
-<div class="highlight-git_shell"><div class="highlight"><pre><span class="k">% git</span><span class="g-Whitespace"> </span><span class="gd">submodule add </span><span class="ow">git://gitorious.org/boost/straszheims-python.git</span><span class="g-Whitespace"> </span>src/python<span class="g-Whitespace"></span>
-<span class="go">Initialized</span><span class="g-Whitespace"> </span><span class="go">empty</span><span class="g-Whitespace"> </span><span class="go">Git</span><span class="g-Whitespace"> </span><span class="go">repository</span><span class="g-Whitespace"> </span><span class="go">in</span><span class="g-Whitespace"> </span><span class="go">/home/troy/Projects/ryppl/tmp/boost2/src/python/.git/</span><span class="g-Whitespace"></span>
+<div class="highlight-git_shell"><div class="highlight"><pre><span class="k">% git</span><span class="g-Whitespace"> </span><span class="gd">submodule add </span><span class="ow">git://github.com/boost-lib/your-python.git</span><span class="g-Whitespace"> </span>src/python<span class="g-Whitespace"></span>
+<span class="go">Initialized</span><span class="g-Whitespace"> </span><span class="go">empty</span><span class="g-Whitespace"> </span><span class="go">Git</span><span class="g-Whitespace"> </span><span class="go">repository</span><span class="g-Whitespace"> </span><span class="go">in</span><span class="g-Whitespace"> </span><span class="go">/home/you/Projects/ryppl/tmp/boost2/src/python/.git/</span><span class="g-Whitespace"></span>
 <span class="go">remote:</span><span class="g-Whitespace"> </span><span class="go">Counting</span><span class="g-Whitespace"> </span><span class="go">objects:</span><span class="g-Whitespace"> </span><span class="go">1191,</span><span class="g-Whitespace"> </span><span class="go">done.</span><span class="g-Whitespace"></span>
 <span class="go">remote:</span><span class="g-Whitespace"> </span><span class="go">Compressing</span><span class="g-Whitespace"> </span><span class="go">objects:</span><span class="g-Whitespace"> </span><span class="go">100%</span><span class="g-Whitespace"> </span><span class="go">(768/768),</span><span class="g-Whitespace"> </span><span class="go">done.</span><span class="g-Whitespace"></span>
 <span class="go">remote:</span><span class="g-Whitespace"> </span><span class="go">Total</span><span class="g-Whitespace"> </span><span class="go">1191</span><span class="g-Whitespace"> </span><span class="go">(delta</span><span class="g-Whitespace"> </span><span class="go">468),</span><span class="g-Whitespace"> </span><span class="go">reused</span><span class="g-Whitespace"> </span><span class="go">1117</span><span class="g-Whitespace"> </span><span class="go">(delta</span><span class="g-Whitespace"> </span><span class="go">396)</span><span class="g-Whitespace"></span>
@@ -175,7 +176,7 @@ commit them to superprojects.</p>
 </div>
 <p>Now that the python repository now points to the right place:</p>
 <div class="highlight-git_shell"><div class="highlight"><pre><span class="go">$</span><span class="g-Whitespace"> </span><span class="go">grep</span><span class="g-Whitespace"> </span><span class="go">url</span><span class="g-Whitespace"> </span><span class="go">src/python/.git/config</span><span class="g-Whitespace"></span>
-<span class="g-Whitespace">        </span><span class="go">url</span><span class="g-Whitespace"> </span><span class="go">=</span><span class="g-Whitespace"> </span><span class="ow">git://gitorious.org/boost/straszheims-python.git</span><span class="g-Whitespace"></span>
+<span class="g-Whitespace">        </span><span class="go">url</span><span class="g-Whitespace"> </span><span class="go">=</span><span class="g-Whitespace"> </span><span class="ow">git://github.com/boost-lib/your-python.git</span><span class="g-Whitespace"></span>
 </pre></div>
 </div>
 <p>Now git tells us that we've added the submodule, and shows the new
@@ -205,10 +206,10 @@ head commit:</p>
 <span class="go">@@</span><span class="g-Whitespace"> </span><span class="go">-10,3</span><span class="g-Whitespace"> </span><span class="go">+10,6</span><span class="g-Whitespace"> </span><span class="go">@@</span><span class="g-Whitespace"></span>
 <span class="g-Whitespace"> </span><span class="go">[submodule</span><span class="g-Whitespace"> </span><span class="s2">&quot;cmake&quot;</span><span class="go">]</span><span class="g-Whitespace"></span>
 <span class="g-Whitespace">        </span><span class="go">path</span><span class="g-Whitespace"> </span><span class="go">=</span><span class="g-Whitespace"> </span><span class="go">cmake</span><span class="g-Whitespace"></span>
-<span class="g-Whitespace">        </span><span class="go">url</span><span class="g-Whitespace"> </span><span class="go">=</span><span class="g-Whitespace"> </span><span class="ow">git://gitorious.org/ryppl/cmake.git</span><span class="g-Whitespace"></span>
+<span class="g-Whitespace">        </span><span class="go">url</span><span class="g-Whitespace"> </span><span class="go">=</span><span class="g-Whitespace"> </span><span class="ow">git://github.com/boost-lib/cmake.git</span><span class="g-Whitespace"></span>
 <span class="go">+[submodule</span><span class="g-Whitespace"> </span><span class="s2">&quot;src/python&quot;</span><span class="go">]</span><span class="g-Whitespace"></span>
 <span class="go">+</span><span class="g-Whitespace">       </span><span class="go">path</span><span class="g-Whitespace"> </span><span class="go">=</span><span class="g-Whitespace"> </span><span class="go">src/python</span><span class="g-Whitespace"></span>
-<span class="go">+</span><span class="g-Whitespace">       </span><span class="go">url</span><span class="g-Whitespace"> </span><span class="go">=</span><span class="g-Whitespace"> </span><span class="ow">git://gitorious.org/boost/straszheims-python.git</span><span class="g-Whitespace"></span>
+<span class="go">+</span><span class="g-Whitespace">       </span><span class="go">url</span><span class="g-Whitespace"> </span><span class="go">=</span><span class="g-Whitespace"> </span><span class="ow">git://github.com/boost-lib/your-python.git</span><span class="g-Whitespace"></span>
 <span class="go">diff</span><span class="g-Whitespace"> </span><span class="go">--git</span><span class="g-Whitespace"> </span><span class="go">a/src/python</span><span class="g-Whitespace"> </span><span class="go">b/src/python</span><span class="g-Whitespace"></span>
 <span class="go">new</span><span class="g-Whitespace"> </span><span class="go">file</span><span class="g-Whitespace"> </span><span class="go">mode</span><span class="g-Whitespace"> </span><span class="go">160000</span><span class="g-Whitespace"></span>
 <span class="go">index</span><span class="g-Whitespace"> </span><span class="mh">0000000..d6e0e56</span><span class="g-Whitespace"></span>
@@ -219,8 +220,8 @@ head commit:</p>
 </pre></div>
 </div>
 <p>Wherein you can see that the new submodule has been added to
-<tt class="docutils literal"><span class="pre">.gitmodules</span></tt> and the exact commit of the submodule is somehow
-associated (<tt class="docutils literal"><span class="pre">file</span> <span class="pre">mode</span> <span class="pre">160000</span></tt>) with the path <tt class="docutils literal"><span class="pre">src/python</span></tt>.</p>
+<tt class="file docutils literal"><span class="pre">.gitmodules</span></tt> and the exact commit of the submodule is somehow
+associated (<tt class="docutils literal"><span class="pre">file</span> <span class="pre">mode</span> <span class="pre">160000</span></tt>) with the path <tt class="file docutils literal"><span class="pre">src/python</span></tt>.</p>
 <p>Commit the change:</p>
 <div class="highlight-git_shell"><div class="highlight"><pre><span class="k">% git</span><span class="g-Whitespace"> </span><span class="gd">commit </span><span class="o">-m </span><span class="s2">&quot;add my python branch&quot;</span><span class="g-Whitespace"></span>
 <span class="go">[1.41.0</span><span class="g-Whitespace"> </span><span class="go">64d5917]</span><span class="g-Whitespace"> </span><span class="go">add</span><span class="g-Whitespace"> </span><span class="go">my</span><span class="g-Whitespace"> </span><span class="go">python</span><span class="g-Whitespace"> </span><span class="go">branch</span><span class="g-Whitespace"></span>
@@ -251,7 +252,7 @@ complains:</p>
 </div>
 <p>So add a remote that is writable.  I use the 'push' (<tt class="docutils literal"><span class="pre">git&#64;</span></tt>) url and
 name it <em>readwrite</em>:</p>
-<div class="highlight-git_shell"><div class="highlight"><pre><span class="go">$</span><span class="g-Whitespace"> </span><span class="go">git</span><span class="g-Whitespace"> </span><span class="go">remote</span><span class="g-Whitespace"> </span><span class="go">add</span><span class="g-Whitespace"> </span><span class="go">readwrite</span><span class="g-Whitespace"> </span><span class="ow">git@gitorious.org:boost/straszheims-python.git</span><span class="g-Whitespace"></span>
+<div class="highlight-git_shell"><div class="highlight"><pre><span class="go">$</span><span class="g-Whitespace"> </span><span class="go">git</span><span class="g-Whitespace"> </span><span class="go">remote</span><span class="g-Whitespace"> </span><span class="go">add</span><span class="g-Whitespace"> </span><span class="go">readwrite</span><span class="g-Whitespace"> </span><span class="ow">git@github.com:boost-lib/your-python.git</span><span class="g-Whitespace"></span>
 </pre></div>
 </div>
 <p>And push:</p>
@@ -261,8 +262,8 @@ name it <em>readwrite</em>:</p>
 <span class="go">Compressing</span><span class="g-Whitespace"> </span><span class="go">objects:</span><span class="g-Whitespace"> </span><span class="go">100%</span><span class="g-Whitespace"> </span><span class="go">(4/4),</span><span class="g-Whitespace"> </span><span class="go">done.</span><span class="g-Whitespace"></span>
 <span class="go">Writing</span><span class="g-Whitespace"> </span><span class="go">objects:</span><span class="g-Whitespace"> </span><span class="go">100%</span><span class="g-Whitespace"> </span><span class="go">(5/5),</span><span class="g-Whitespace"> </span><span class="go">453</span><span class="g-Whitespace"> </span><span class="go">bytes,</span><span class="g-Whitespace"> </span><span class="go">done.</span><span class="g-Whitespace"></span>
 <span class="go">Total</span><span class="g-Whitespace"> </span><span class="go">5</span><span class="g-Whitespace"> </span><span class="go">(delta</span><span class="g-Whitespace"> </span><span class="go">2),</span><span class="g-Whitespace"> </span><span class="go">reused</span><span class="g-Whitespace"> </span><span class="go">0</span><span class="g-Whitespace"> </span><span class="go">(delta</span><span class="g-Whitespace"> </span><span class="go">0)</span><span class="g-Whitespace"></span>
-<span class="go">=&gt;</span><span class="g-Whitespace"> </span><span class="go">Syncing</span><span class="g-Whitespace"> </span><span class="go">Gitorious...</span><span class="g-Whitespace"> </span><span class="go">[OK]</span><span class="g-Whitespace"></span>
-<span class="go">To</span><span class="g-Whitespace"> </span><span class="ow">git@gitorious.org:boost/straszheims-python.git</span><span class="g-Whitespace"></span>
+<span class="go">=&gt;</span><span class="g-Whitespace"> </span><span class="go">Syncing</span><span class="g-Whitespace"> </span><span class="go">github...</span><span class="g-Whitespace"> </span><span class="go">[OK]</span><span class="g-Whitespace"></span>
+<span class="go">To</span><span class="g-Whitespace"> </span><span class="ow">git@github.com:boost-lib/your-python.git</span><span class="g-Whitespace"></span>
 <span class="g-Whitespace">   </span><span class="mh">8d3d698..d6e0e56</span><span class="g-Whitespace">  </span><span class="go">HEAD</span><span class="g-Whitespace"> </span><span class="go">-&gt;</span><span class="g-Whitespace"> </span><span class="go">master</span><span class="g-Whitespace"></span>
 </pre></div>
 </div>
@@ -338,8 +339,8 @@ modifications to the python project.</p>
       </ul>
     </div>
     <div class="footer">
-      &copy; Copyright 2009-2010, troy d. straszheim and david abrahams --  Version 0a92bff13e5d792b6f289ef2377edb5ebfb40da7, Wed, 14 Jul 2010.
-      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 0.6.5.
+        &copy; Copyright 2009-2010, troy d. straszheim and david abrahams --  Version 5d6cb06ae1d828dbf47188ca9285e7137cda2775, Fri, 30 Jul 2010.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.0.1.
     </div>
   </body>
 </html>

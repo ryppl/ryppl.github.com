@@ -1,3 +1,5 @@
+
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
@@ -10,14 +12,15 @@
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
-        URL_ROOT:    '#',
+        URL_ROOT:    '',
         VERSION:     '0.0',
-        COLLAPSE_MODINDEX: false,
+        COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
       };
     </script>
     <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
     <script type="text/javascript" src="_static/doctools.js"></script>
     <link rel="top" title="Ryppl" href="index.html" />
     <link rel="next" title="Dependency Management" href="dependency-management.html" />
@@ -44,50 +47,50 @@
             <p class="logo"><a href="index.html">
               <img class="logo" src="_static/ryppl.png" alt="Logo"/>
             </a></p>
-            <h3><a href="index.html">Table Of Contents</a></h3>
-            <ul>
-<li><a class="reference external" href="#">Workflows</a><ul>
-<li><a class="reference external" href="#conventions">Conventions</a></li>
-<li><a class="reference external" href="#fundamentals">Fundamentals</a><ul>
-<li><a class="reference external" href="#tool-installation">Tool Installation</a></li>
-<li><a class="reference external" href="#workspaces">Workspaces</a></li>
-<li><a class="reference external" href="#package-installation">Package Installation</a></li>
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Workflows</a><ul>
+<li><a class="reference internal" href="#conventions">Conventions</a></li>
+<li><a class="reference internal" href="#fundamentals">Fundamentals</a><ul>
+<li><a class="reference internal" href="#tool-installation">Tool Installation</a></li>
+<li><a class="reference internal" href="#workspaces">Workspaces</a></li>
+<li><a class="reference internal" href="#package-installation">Package Installation</a></li>
 </ul>
 </li>
-<li><a class="reference external" href="#development">Development</a><ul>
-<li><a class="reference external" href="#getting-the-source">Getting the Source</a></li>
-<li><a class="reference external" href="#publishing-projects">Publishing Projects</a></li>
-<li><a class="reference external" href="#merge-requests">Merge Requests</a></li>
-<li><a class="reference external" href="#creating-a-release">Creating a Release</a></li>
-<li><a class="reference external" href="#review-outstanding-merge-requests">Review Outstanding Merge Requests</a></li>
+<li><a class="reference internal" href="#development">Development</a><ul>
+<li><a class="reference internal" href="#getting-the-source">Getting the Source</a></li>
+<li><a class="reference internal" href="#publishing-projects">Publishing Projects</a></li>
+<li><a class="reference internal" href="#merge-requests">Merge Requests</a></li>
+<li><a class="reference internal" href="#creating-a-release">Creating a Release</a></li>
+<li><a class="reference internal" href="#review-outstanding-merge-requests">Review Outstanding Merge Requests</a></li>
 </ul>
 </li>
-<li><a class="reference external" href="#testing">Testing</a><ul>
-<li><a class="reference external" href="#testing-specific-projects">Testing Specific Projects</a></li>
-<li><a class="reference external" href="#testing-dependencies">Testing Dependencies</a></li>
-<li><a class="reference external" href="#remote-testing">Remote Testing</a></li>
-<li><a class="reference external" href="#test-slave-aliases">Test Slave Aliases</a></li>
-<li><a class="reference external" href="#setting-up-a-test-slave">Setting up a Test Slave</a></li>
-<li><a class="reference external" href="#subscribing-to-test-results">Subscribing to Test Results</a></li>
-<li><a class="reference external" href="#releasability">Releasability</a></li>
+<li><a class="reference internal" href="#testing">Testing</a><ul>
+<li><a class="reference internal" href="#testing-specific-projects">Testing Specific Projects</a></li>
+<li><a class="reference internal" href="#testing-dependencies">Testing Dependencies</a></li>
+<li><a class="reference internal" href="#remote-testing">Remote Testing</a></li>
+<li><a class="reference internal" href="#test-slave-aliases">Test Slave Aliases</a></li>
+<li><a class="reference internal" href="#setting-up-a-test-slave">Setting up a Test Slave</a></li>
+<li><a class="reference internal" href="#subscribing-to-test-results">Subscribing to Test Results</a></li>
+<li><a class="reference internal" href="#releasability">Releasability</a></li>
 </ul>
 </li>
-<li><a class="reference external" href="#packaging-release">Packaging / Release</a></li>
+<li><a class="reference internal" href="#packaging-release">Packaging / Release</a></li>
 </ul>
 </li>
 </ul>
 
-            <h4>Previous topic</h4>
-            <p class="topless"><a href="technology.html"
-                                  title="previous chapter">Technologies</a></p>
-            <h4>Next topic</h4>
-            <p class="topless"><a href="dependency-management.html"
-                                  title="next chapter">Dependency Management</a></p>
-            <h3>This Page</h3>
-            <ul class="this-page-menu">
-              <li><a href="_sources/workflows.txt"
-                     rel="nofollow">Show Source</a></li>
-            </ul>
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="technology.html"
+                        title="previous chapter">Technologies</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="dependency-management.html"
+                        title="next chapter">Dependency Management</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="_sources/workflows.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
         </div>
       </div>
 
@@ -178,14 +181,14 @@ $ ryppl checkout <em>project</em>
 of your ryppl workspace.  You now have a Git repository in which to
 work.  To commit changes locally, simply use regular Git commands in
 the project subdirectory (or a child).  Most ryppl commands described
-in the <a class="reference internal" href="#development">Development</a> section are documented with the assumption that
+in the <a class="reference external" href="#development">Development</a> section are documented with the assumption that
 the current directory is the project subdirectory or a child thereof.</p>
 <p>If you are a maintainer, ryppl will detect that fact.  Otherwise, most
 likely you will want to create a public repository where you can
 publish your changes.  You can wait until you actually want to
 publish, but you may find that you are more inclined to push changes
 out (and thus create a non-local backup of your work) if the
-repository is already prepared.  See <a class="reference internal" href="#publishing-projects">Publishing Projects</a> for
+repository is already prepared.  See <a class="reference external" href="#publishing-projects">Publishing Projects</a> for
 details.</p>
 </div>
 <div class="section" id="publishing-projects">
@@ -404,8 +407,8 @@ though.</td></tr>
       </ul>
     </div>
     <div class="footer">
-      &copy; Copyright 2009-2010, troy d. straszheim and david abrahams --  Version 0a92bff13e5d792b6f289ef2377edb5ebfb40da7, Wed, 14 Jul 2010.
-      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 0.6.5.
+        &copy; Copyright 2009-2010, troy d. straszheim and david abrahams --  Version 5d6cb06ae1d828dbf47188ca9285e7137cda2775, Fri, 30 Jul 2010.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.0.1.
     </div>
   </body>
 </html>
